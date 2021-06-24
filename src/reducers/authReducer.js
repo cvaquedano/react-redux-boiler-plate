@@ -9,6 +9,7 @@ import {
     GET_USER,
     GET_USER_SUCCESS,
     GET_USER_ERROR,
+    LOGOUT,
     LOADING
 
 } from '../types';
@@ -43,6 +44,7 @@ export default function(state= initialState, action){
                 loading:false
             }
 
+        case LOGOUT:
         case SIGNUP_ERROR:
         case GET_USER_ERROR:
         case LOGIN_ERROR:

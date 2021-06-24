@@ -9,7 +9,7 @@ const MyAppRoutes = () => {
        <Switch>
            <div>
 
-               <Navbar/>
+               <Navbar />
 
                <div>
                <Route exact path="/main" component={Main} />

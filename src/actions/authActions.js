@@ -89,7 +89,6 @@ export function signUpAction(datos) {
 
 export function usuarioAutenticado() {
     return async (dispatch) =>{
-        console.log('usuarioAutenticado');
         dispatch({
             type: GET_USER
         });
