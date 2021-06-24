@@ -6,21 +6,18 @@ from  '../types'
 
 export function showAlertAction(alert){
     return(dispatch) =>{
-        dispatch(createAlert(alert))
+        dispatch({
+            type:SHOW_ALERT,
+            payload: alert
+        })
     }
 }
 
-const createAlert = alert => ({
-    type:SHOW_ALERT,
-    payload: alert
-});
 
-export function hideAlertAction(alert){
+export function hideAlertAction(){
     return(dispatch) =>{
-        dispatch(hideAlert())
+        dispatch({
+            type:HIDE_ALERT,
+        })
     }
 }
-
-const hideAlert = () => ({
-    type:HIDE_ALERT,
-});

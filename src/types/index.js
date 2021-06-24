@@ -19,7 +19,7 @@ export const SHOW_ALERT='SHOW_ALERT'
 export const HIDE_ALERT='HIDE_ALERT'
 
 export const SIGNUP = 'SIGNUP';
-export const SIGNUP_SUCCESS = 'REGISTRO_SUCCESS';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
 export const GET_USER = 'GET_USER';
