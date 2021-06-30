@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.acciones .btn:first-of-type {
+  margin-right: 1rem;
+}
+
+.header {
+  margin-bottom: 1rem;
+}

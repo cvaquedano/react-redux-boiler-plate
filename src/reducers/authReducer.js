@@ -17,7 +17,6 @@ import {
 // cada reducer tiene su propio state
 
 const initialState = {
-    token: localStorage.getItem('token'),
     authenticated: null,
     user: null,
     loading: false
@@ -26,12 +25,17 @@ const initialState = {
 export default function(state= initialState, action){
     switch(action.type){
 
-        case GET_USER:
+
         case SIGNUP:
         case LOGIN:
             return {
                 ...state,
                 authenticated: false,
+                loading:true
+            };
+        case GET_USER:
+            return {
+                ...state,
                 loading:true
             };
 

@@ -2,7 +2,9 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Main from '../layout/Main';
 import Navbar from '../layout/Navbar';
+import MasterStatusEdit from '../masterStatus/MasterStatusEdit';
 import MasterStatusList from '../masterStatus/MasterStatusList';
+import MasterStatusNew from '../masterStatus/MasterStatusNew';
 
 const MyAppRoutes = () => {
     return (
@@ -24,8 +26,9 @@ const MyAppRoutes = () => {
                 <Route exact path="/master/:masterId/detail/edit/:id" component={MasterDetailEdit} /> */}
 
                 <Route exact path="/status" component={MasterStatusList} />
-                {/* <Route exact path='/status/new' component={MasterStatusNew}/>
-                <Route exact path='/status/edit/:id' component={MasterStatusEdit}/> */}
+                <Route exact path='/status/new' component={MasterStatusNew}/>
+                <Route exact path='/status/edit/:id' component={MasterStatusEdit}/>
+                
 
                </div>
            </div>

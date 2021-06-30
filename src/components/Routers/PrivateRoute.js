@@ -9,10 +9,14 @@ const PrivateRoute = ({component: Component, ...props}) => {
 
     const authenticated  = useSelector(state=> state.auth.authenticated );
     const dispatch = useDispatch();
-    const getUser= () => dispatch(usuarioAutenticado());
+   // const getUser= () => dispatch(usuarioAutenticado());
 
    // todo si refresco la pantalla, y existe un token en memoria, deberia de entrar a la pagina principal
     useEffect(()=> {
+
+        const getUser = () => dispatch(usuarioAutenticado());
+
+        getUser();
         //getUser();
         // eslint-disable-next-line
     },[]);

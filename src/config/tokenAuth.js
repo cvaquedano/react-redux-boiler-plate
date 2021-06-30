@@ -1,10 +1,10 @@
-import clienteAxios from  './axios';
+import axiosClient from  './axios';
 
 const tokenAuth = token => {
     if(token){
-        clienteAxios.defaults.headers.Authorization = `Bearer ${token}`;
+        axiosClient.defaults.headers.Authorization = `Bearer ${token}`;
     } else {
-        clienteAxios.defaults.headers.Authorization = '';
+        axiosClient.defaults.headers.Authorization = '';
     }
 }
 

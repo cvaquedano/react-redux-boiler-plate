@@ -15,7 +15,7 @@ import {
     LOGOUT
 
 } from '../types';
-import clienteAxios from '../config/axios';
+import axiosClient from '../config/axios';
 import tokenAuth from '../config/tokenAuth';
 import Swal from 'sweetalert2';
 
@@ -26,14 +26,17 @@ export function loginAction(datos) {
             dispatch({
                 type:LOGIN
             });
-            const respuesta = await clienteAxios.post('api/users/authenticate',datos);
+            const respuesta = await axiosClient.post('api/users/authenticate',datos);
+            console.log('login');
+            console.log(respuesta);
 
             dispatch({
                 type:LOGIN_SUCCESS,
                 payload: respuesta.data
             });
 
-            usuarioAutenticado();
+            dispatch( usuarioAutenticado());
+
 
         } catch (error) {
             dispatch({
@@ -57,7 +60,7 @@ export function signUpAction(datos) {
 
         try{
             // insertar en la api
-             await clienteAxios.post('/api/users/register',datos);
+             await axiosClient.post('/api/users/register',datos);
 
             dispatch({
                 type: SIGNUP_SUCCESS,
@@ -98,12 +101,10 @@ export function usuarioAutenticado() {
 
             tokenAuth(token);
             try {
-                const respuesta = await clienteAxios.get('/api/users');
-                console.log('adentro aut');
-                console.log(respuesta);
+                const respuesta = await axiosClient.get('/api/users');
                 dispatch({
                     type: GET_USER_SUCCESS,
-                    payload: respuesta.datos
+                    payload: respuesta.data
                 });
 
             } catch (error) {
