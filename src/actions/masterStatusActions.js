@@ -22,6 +22,8 @@ import {
     DELETE_MASTER_STATUS_SUCCESS,
     DELETE_MASTER_STATUS_ERROR,
 
+    FILTER,
+
     LOADING
 
 } from '../types';
@@ -106,6 +108,15 @@ export function setActualMasterStatus(data){
     }
 }
 
+
+export function filterMasterStatusAction(data){
+    return (dispatch) =>{
+        dispatch({
+            type:FILTER,
+            payload:data
+        })
+    }
+}
 export function deleteMasterStatusAction(id){
     return async (dispatch) =>{
 

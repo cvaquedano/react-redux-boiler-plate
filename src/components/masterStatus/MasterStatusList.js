@@ -13,7 +13,7 @@ const MasterStatusList = () => {
      // acceder al state del store
      const loading = useSelector(state=> state.masterStatus.loading);
      const error = useSelector(state=> state.masterStatus.error);
-     const masterStatusList = useSelector(state=> state.masterStatus.masterStatusList);
+     const masterStatusListFiltered = useSelector(state=> state.masterStatus.masterStatusListFiltered);
 
     useEffect(()=>{
         const getMasterStatus = () => dispatch(getMasterStatusAction());
@@ -40,8 +40,8 @@ const MasterStatusList = () => {
                    </tr>
                </thead>
                <tbody>
-                   { masterStatusList.length ===0 ? 'No status to show' : (
-                       masterStatusList.map(status => (
+                   { masterStatusListFiltered.length ===0 ? 'No status to show' : (
+                       masterStatusListFiltered.map(status => (
                            <MasterStatus
                             key={status.id}
                             masterStatus={status}

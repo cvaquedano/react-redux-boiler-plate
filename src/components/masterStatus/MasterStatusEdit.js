@@ -51,6 +51,7 @@ const MasterStatusEdit = () => {
                            <label>Status Value</label>
                            <input
                                 type='text'
+                                autoFocus
                                 className='form-control'
                                 placeholder='Status Value'
                                 name='value'

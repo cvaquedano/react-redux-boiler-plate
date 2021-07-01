@@ -160,6 +160,7 @@ const SignUp = (props) => {
              <label for="firstName">First Name</label>
              <input
                 type="text"
+                autoFocus
                 class="form-control"
                 id="firstName"
                 name='firstName'

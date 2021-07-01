@@ -21,13 +21,15 @@ import {
     DELETE_MASTER_STATUS,
     DELETE_MASTER_STATUS_SUCCESS,
     DELETE_MASTER_STATUS_ERROR,
-    LOADING
+    LOADING,
+    FILTER
 
 } from '../types';
 
 // cada reducer tiene su propio state
 
 const initialState = {
+    masterStatusListFiltered:[],
     masterStatusList:[],
     masterStatus: null,
     error: null,
@@ -51,7 +53,8 @@ export default function(state= initialState, action){
                 return {
                     ...state,
                     loading:false,
-                    masterStatusList : [...state.masterStatusList, action.payload]
+                    masterStatusList : [...state.masterStatusList, action.payload],
+                    masterStatusListFiltered : [...state.masterStatusList, action.payload]
                 };
 
 
@@ -59,7 +62,8 @@ export default function(state= initialState, action){
                 return {
                     ...state,
                     loading:false,
-                    masterStatusList :  action.payload
+                    masterStatusList :  action.payload,
+                    masterStatusListFiltered : action.payload
                 };
 
 
@@ -75,6 +79,10 @@ export default function(state= initialState, action){
                     loading: false,
                     masterStatus: null,
                     masterStatusList : state.masterStatusList.map(masterStatus =>
+                        masterStatus.id === action.payload.id ? masterStatus = action.payload :
+                        masterStatus
+                    ),
+                    masterStatusListFiltered : state.masterStatusList.map(masterStatus =>
                         masterStatus.id === action.payload.id ? masterStatus = action.payload :
                         masterStatus
                     )
@@ -95,6 +103,15 @@ export default function(state= initialState, action){
                     loading: false,
                     masterStatusList: state.masterStatusList.filter(status => status.id !== action.payload),
                     masterStatus:null
+                };
+            case FILTER:
+                return {
+                    ...state,
+                    masterStatusListFiltered: action.payload.trim()===''? state.masterStatusList : state.masterStatusList
+                    .filter(status =>
+                        (status.value.toUpperCase().indexOf(action.payload.toUpperCase())>-1) ||
+                        (status.description.toUpperCase().indexOf(action.payload.toUpperCase())>-1)
+                        )
                 };
             case DELETE_MASTER_STATUS_ERROR:
                 return {

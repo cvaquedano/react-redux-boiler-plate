@@ -28,7 +28,6 @@ const MyAppRoutes = () => {
                 <Route exact path="/status" component={MasterStatusList} />
                 <Route exact path='/status/new' component={MasterStatusNew}/>
                 <Route exact path='/status/edit/:id' component={MasterStatusEdit}/>
-                
 
                </div>
            </div>

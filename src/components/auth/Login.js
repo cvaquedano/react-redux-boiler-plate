@@ -69,6 +69,7 @@ const Login = (props) => {
                 <label for="username">Email address or user name</label>
                 <input
                 type="text"
+                autoFocus
                 class="form-control"
                 id="username"
                 name='username'
