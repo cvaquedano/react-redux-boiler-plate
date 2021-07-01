@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {loginAction} from '../../actions/authActions';
 import {showAlertAction, hideAlertAction} from '../../actions/alertActions';
+import Spinner from '../layout/Spinner';
 
 const Login = (props) => {
 
@@ -92,7 +93,7 @@ const Login = (props) => {
                 <button type="button" onClick={goToSignUp} class="btn btn-link">Sign up</button>
             </fieldset>
             </form>
-            { loading ? <p>loading...</p> : null}
+            { loading ? <Spinner/> : null}
         </div>
     );
 };

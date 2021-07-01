@@ -3,6 +3,7 @@ import React, { Fragment, useEffect } from 'react';
 // Redux
 import {useSelector, useDispatch} from 'react-redux';
 import {getMasterStatusAction} from  '../../actions/masterStatusActions';
+import Spinner from '../layout/Spinner';
 import MasterStatus from './MasterStatus';
 import MasterStatusHeader from './MasterStatusHeader';
 
@@ -30,7 +31,7 @@ const MasterStatusList = () => {
            <MasterStatusHeader/>
            </div>
            { error ? <p className="font-weight-bold alert alert-danger text-center">Hubo un error</p> : null}
-           {loading ? <p className='text-center'>Cargando...</p> : null}
+           {loading ? <Spinner/> : null}
            <table className='table table-striped'>
                <thead className='bg-primary table-dark'>
                    <tr>
