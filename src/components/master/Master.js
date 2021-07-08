@@ -4,12 +4,12 @@ import Swal from 'sweetalert2';
 
 // Redux
 import {useDispatch} from 'react-redux';
-import {deleteMasterStatusAction, setActualMasterStatus} from '../../actions/masterStatusActions';
+import {deleteMasterAction, setActualMaster} from '../../actions/masterActions';
 
 
-const MasterStatus = ({masterStatus}) => {
+const Master = ({master}) => {
 
-    const {value, description, id} = masterStatus;
+    const {id, name, dob, gender, }= master
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -23,31 +23,44 @@ const MasterStatus = ({masterStatus}) => {
             showCancelButton:true,
             confirmButtonColor:'#3085d6',
             cancelButtonColor:'#d33',
-            confirmButtonText:'Si, borrarlo!'
+            confirmButtonText:'Yes, Delete it!'
         }).then((result)=>{
             if(result.value){
 
-                dispatch(deleteMasterStatusAction(id));
+                dispatch(deleteMasterAction(id));
             }
         });
 
     }
 
     // funcion que redirige de forma programada
-    const redirectToEditMasterStatus = data => {
+    const redirectToEditMaster = data => {
 
-        dispatch(setActualMasterStatus(data));
-        history.push(`/status/edit/${data.id}`);
+        dispatch(setActualMaster(data));
+        history.push(`/master/edit/${data.id}`);
+    }
+    const redirectoToMasterDetail = master => {
+
+        dispatch(setActualMaster(master));
+        history.push(`/master/${master.id}/detail`);
     }
     return (
         <tr>
-            <td className='capitalize'>{value}</td>
-            <td className='capitalize'>{description}</td>
+            <td className='capitalize'>{name}</td>
+            <td > {dob.slice(0,10)}</td>
+            <td>{gender ? 'Male' : 'Female'}</td>
             <td className="acciones">
-            <button
+                <button
                     type="button"
-                    className="btn btn-primary"
-                    onClick={() => redirectToEditMasterStatus(masterStatus)}
+                    className="btn btn-info mr-2"
+                    onClick={() => redirectoToMasterDetail(master)}
+                >
+                    Detail
+                </button>
+                <button
+                    type="button"
+                    className="btn btn-primary mr-2"
+                    onClick={() => redirectToEditMaster(master)}
                 >
                     Edit
                 </button>
@@ -63,4 +76,5 @@ const MasterStatus = ({masterStatus}) => {
     );
 };
 
-export default MasterStatus;
+
+export default Master;

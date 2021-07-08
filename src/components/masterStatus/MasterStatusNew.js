@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {addMasterStatusAction} from '../../actions/masterStatusActions';
 import {showAlertAction, hideAlertAction} from '../../actions/alertActions';
+import Spinner from '../layout/Spinner';
 
 const MasterStatusNew = ({history}) => {
 
@@ -90,7 +91,7 @@ const MasterStatusNew = ({history}) => {
                             Add
                        </button>
                    </form>
-                   { loading ? <p>Loading...</p> : null}
+                   { loading ? <Spinner/> : null}
                </div>
            </div>
        </div>

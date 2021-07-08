@@ -22,7 +22,7 @@ import {
     DELETE_MASTER_STATUS_SUCCESS,
     DELETE_MASTER_STATUS_ERROR,
     LOADING,
-    FILTER
+    FILTER_MASTER_STATUS
 
 } from '../types';
 
@@ -48,6 +48,13 @@ export default function(state= initialState, action){
                 ...state,
                 loading:true
             };
+
+            case GET_MASTER_STATUS_BY_ID_SUCCESS:
+                return {
+                    ...state,
+                    masterStatus: action.payload,
+                    loading : false
+                };
 
             case ADD_MASTER_STATUS_SUCCESS:
                 return {
@@ -102,9 +109,10 @@ export default function(state= initialState, action){
                     ...state,
                     loading: false,
                     masterStatusList: state.masterStatusList.filter(status => status.id !== action.payload),
+                    masterStatusListFiltered: state.masterStatusList.filter(status => status.id !== action.payload),
                     masterStatus:null
                 };
-            case FILTER:
+            case FILTER_MASTER_STATUS:
                 return {
                     ...state,
                     masterStatusListFiltered: action.payload.trim()===''? state.masterStatusList : state.masterStatusList

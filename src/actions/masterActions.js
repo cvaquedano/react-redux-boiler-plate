@@ -1,58 +1,57 @@
 import {
-    GET_MASTER_STATUS,
-    GET_MASTER_STATUS_SUCCESS,
-    GET_MASTER_STATUS_ERROR,
+    GET_MASTER,
+    GET_MASTER_SUCCESS,
+    GET_MASTER_ERROR,
 
-    ADD_MASTER_STATUS,
-    ADD_MASTER_STATUS_SUCCESS,
-    ADD_MASTER_STATUS_ERROR,
-
-    GET_MASTER_STATUS_BY_ID,
-    GET_MASTER_STATUS_BY_ID_SUCCESS,
-    GET_MASTER_STATUS_BY_ID_ERROR,
-
-    SET_ACTUAL_MASTER_STATUS,
+    ADD_MASTER,
+    ADD_MASTER_SUCCESS,
+    ADD_MASTER_ERROR,
 
 
-    EDIT_MASTER_STATUS,
-    EDIT_MASTER_STATUS_SUCCESS,
-    EDIT_MASTER_STATUS_ERROR,
+    SET_ACTUAL_MASTER,
 
-    DELETE_MASTER_STATUS,
-    DELETE_MASTER_STATUS_SUCCESS,
-    DELETE_MASTER_STATUS_ERROR,
 
-    FILTER_MASTER_STATUS
+    EDIT_MASTER,
+    EDIT_MASTER_SUCCESS,
+    EDIT_MASTER_ERROR,
+
+    DELETE_MASTER,
+    DELETE_MASTER_SUCCESS,
+    DELETE_MASTER_ERROR,
+
+    FILTER_MASTER,
+
+    LOADING
 
 } from '../types';
 import axiosClient from '../config/axios';
 import Swal from 'sweetalert2';
 
-export function addMasterStatusAction(data) {
+export function addMasterAction(data) {
     return async (dispatch) =>{
         dispatch({
-            type: ADD_MASTER_STATUS
+            type: ADD_MASTER
         });
 
         try{
             // insertar en la api
-            const respuesta = await axiosClient.post('/api/MasterStatus/post',data);
+            const respuesta = await axiosClient.post('/api/Master/post',data);
 
             dispatch({
-                type: ADD_MASTER_STATUS_SUCCESS,
+                type: ADD_MASTER_SUCCESS,
                 payload: respuesta.data
             });
 
             Swal.fire(
                 'SUCCESS',
-                'Master status added successfully',
+                'Master  added successfully',
                 'success'
             );
 
         } catch(error){
             console.log(error);
             dispatch({
-                type: ADD_MASTER_STATUS_ERROR,
+                type: ADD_MASTER_ERROR,
                 payload: true
             });
             Swal.fire({
@@ -66,23 +65,23 @@ export function addMasterStatusAction(data) {
     }
 }
 
-export function getMasterStatusAction(){
+export function getMasterAction(){
     return async (dispatch) =>{
         dispatch({
-            type: GET_MASTER_STATUS
+            type: GET_MASTER
         });
 
         try{
-            const respuesta = await axiosClient.get('/api/MasterStatus');
+            const respuesta = await axiosClient.get('/api/Master');
             dispatch({
-                type: GET_MASTER_STATUS_SUCCESS,
+                type: GET_MASTER_SUCCESS,
                 payload: respuesta.data
             });
 
         } catch(error){
             console.log(error);
             dispatch({
-                type: GET_MASTER_STATUS_ERROR,
+                type: GET_MASTER_ERROR,
                 payload: error
             });
             Swal.fire({
@@ -96,67 +95,37 @@ export function getMasterStatusAction(){
     }
 }
 
-export function getMasterStatusByIdAction(id){
-    return async (dispatch) =>{
-        dispatch({
-            type: GET_MASTER_STATUS_BY_ID
-        });
-
-        try{
-            const respuesta = await axiosClient.get(`/api/MasterStatus/${id}`);
-            dispatch({
-                type: GET_MASTER_STATUS_BY_ID_SUCCESS,
-                payload: respuesta.data
-            });
-
-        } catch(error){
-            console.log(error);
-            dispatch({
-                type: GET_MASTER_STATUS_BY_ID_ERROR,
-                payload: error
-            });
-            Swal.fire({
-                icon:'error',
-                title: 'Hubo un error',
-                text: error.response.data.message
-                }
-            );
-
-        }
-    }
-}
-
-export function setActualMasterStatus(data){
+export function setActualMaster(data){
     return (dispatch) =>{
         dispatch({
-            type:SET_ACTUAL_MASTER_STATUS,
+            type:SET_ACTUAL_MASTER,
             payload:data
         })
     }
 }
 
 
-export function filterMasterStatusAction(data){
+export function filterMasterAction(data){
     return (dispatch) =>{
         dispatch({
-            type:FILTER_MASTER_STATUS,
+            type:FILTER_MASTER,
             payload:data
         })
     }
 }
-export function deleteMasterStatusAction(id){
+export function deleteMasterAction(id){
     return async (dispatch) =>{
 
         dispatch({
-            type: DELETE_MASTER_STATUS,
+            type: DELETE_MASTER,
             payload: id
         });
 
         try{
             // borrar de la api
-            await axiosClient.delete(`/api/MasterStatus/${id}`);
+            await axiosClient.delete(`/api/Master/${id}`);
             dispatch({
-                type: DELETE_MASTER_STATUS_SUCCESS,
+                type: DELETE_MASTER_SUCCESS,
                 payload: id
             });
 
@@ -168,7 +137,7 @@ export function deleteMasterStatusAction(id){
         } catch(error){
             console.log(error);
             dispatch({
-                type: DELETE_MASTER_STATUS_ERROR,
+                type: DELETE_MASTER_ERROR,
                 payload: error
             });
             Swal.fire({
@@ -183,27 +152,35 @@ export function deleteMasterStatusAction(id){
 }
 
 
-export function editMasterStatusAction(data){
+export function editMasterAction(data){
     return async (dispatch) => {
         dispatch({
 
-            type: EDIT_MASTER_STATUS,
+            type: EDIT_MASTER,
             payload: data
 
         });
         try {
 
-            await axiosClient.put(`/api/MasterStatus/${data.id}`,data);
+            if(data.genderText==='1'){
+                data.gender = Boolean(true);
+            } else {
+                data.gender = Boolean(false);
+            }
+
+            data.name = `${data.firstName.trim()} ${data.lastName.trim()}`;
+
+            await axiosClient.put(`/api/Master/${data.id}`,data);
             dispatch({
 
-                type: EDIT_MASTER_STATUS_SUCCESS,
+                type: EDIT_MASTER_SUCCESS,
                 payload: data
             });
 
         } catch (error) {
             console.log(error);
             dispatch({
-                type: EDIT_MASTER_STATUS_ERROR,
+                type: EDIT_MASTER_ERROR,
                 payload: error
             });
             Swal.fire({

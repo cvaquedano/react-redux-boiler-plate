@@ -3,13 +3,14 @@ import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 // Redux
-import {useDispatch} from 'react-redux';
-import {deleteMasterStatusAction, setActualMasterStatus} from '../../actions/masterStatusActions';
+import {useDispatch, useSelector} from 'react-redux';
+import {deleteMasterDetailAction, setActualMasterDetailAction} from '../../../actions/masterDetailActions';
 
 
-const MasterStatus = ({masterStatus}) => {
+const MasterDetail = ({masterDetail}) => {
 
-    const {value, description, id} = masterStatus;
+    const {id, value, quantity, price, total }= masterDetail;
+    const master = useSelector(state=> state.master.master);
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -23,31 +24,34 @@ const MasterStatus = ({masterStatus}) => {
             showCancelButton:true,
             confirmButtonColor:'#3085d6',
             cancelButtonColor:'#d33',
-            confirmButtonText:'Si, borrarlo!'
+            confirmButtonText:'Yes, Delete it!'
         }).then((result)=>{
             if(result.value){
 
-                dispatch(deleteMasterStatusAction(id));
+                dispatch(deleteMasterDetailAction(master.id, id));
             }
         });
 
     }
 
     // funcion que redirige de forma programada
-    const redirectToEditMasterStatus = data => {
+    const redirectToEditmasterDetail = data => {
 
-        dispatch(setActualMasterStatus(data));
-        history.push(`/status/edit/${data.id}`);
+        dispatch(setActualMasterDetailAction(data));
+        history.push(`/master/${master.id}/detail/edit/${masterDetail.id}`);
     }
+
     return (
         <tr>
             <td className='capitalize'>{value}</td>
-            <td className='capitalize'>{description}</td>
+            <td>{quantity}</td>
+            <td>$ {price}</td>
+            <td>$ {total}</td>
             <td className="acciones">
-            <button
+                <button
                     type="button"
-                    className="btn btn-primary"
-                    onClick={() => redirectToEditMasterStatus(masterStatus)}
+                    className="btn btn-primary mr-2"
+                    onClick={() => redirectToEditmasterDetail(masterDetail)}
                 >
                     Edit
                 </button>
@@ -63,4 +67,5 @@ const MasterStatus = ({masterStatus}) => {
     );
 };
 
-export default MasterStatus;
+
+export default MasterDetail;
