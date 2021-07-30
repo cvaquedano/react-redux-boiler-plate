@@ -40,7 +40,6 @@ const MasterEdit = () => {
         // eslint-disable-next-line
     },[])
     useEffect(()=>{
-        console.log(MasterToEdit)
 
         const masterForEdit = {
             id :MasterToEdit.id,

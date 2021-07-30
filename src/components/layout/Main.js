@@ -3,8 +3,9 @@ import React from 'react';
 const Main = () => {
     return (
         <div class="jumbotron">
-            <h1 class="display-3">React boiler plate project.</h1>
-            <p >React hook (useState, useContext, useEffect and useHistory) with three different context.</p>
+            <h1 class="display-3">React Redux boiler plate project.</h1>
+            <p >React redux-thunk for use a Middleware to combine diferent reducers.</p>
+            <p >React hook (useState,  useEffect and useHistory).</p>
             <p >Nested switch is being used to manage public and private routes.</p>
             <p >Axio is used to connect to the backend api.</p>
             <p >Authentication is handled by token that is stored in the localstore.</p>

@@ -27,8 +27,6 @@ export function loginAction(datos) {
                 type:LOGIN
             });
             const respuesta = await axiosClient.post('api/users/authenticate',datos);
-            console.log('login');
-            console.log(respuesta);
 
             dispatch({
                 type:LOGIN_SUCCESS,

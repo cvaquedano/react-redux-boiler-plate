@@ -7,9 +7,7 @@ import {
     ADD_MASTER_SUCCESS,
     ADD_MASTER_ERROR,
 
-
     SET_ACTUAL_MASTER,
-
 
     EDIT_MASTER,
     EDIT_MASTER_SUCCESS,
@@ -19,10 +17,7 @@ import {
     DELETE_MASTER_SUCCESS,
     DELETE_MASTER_ERROR,
 
-    FILTER_MASTER,
-
-    LOADING
-
+    FILTER_MASTER
 } from '../types';
 import axiosClient from '../config/axios';
 import Swal from 'sweetalert2';

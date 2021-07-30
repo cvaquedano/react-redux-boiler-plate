@@ -71,8 +71,7 @@ export function getMasterDetailAction(masterId){
 
         try{
             const respuesta = await axiosClient.get(`/api/master/${masterId}/masterDetail`);
-            console.log("masterDetail");
-            console.log(respuesta.data)
+
             dispatch({
                 type: GET_MASTER_DETAIL_SUCCESS,
                 payload: respuesta.data
